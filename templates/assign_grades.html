@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form action="/assign_grades" method="POST">
+    <div> Student: 
+        <select name="student">
+            {% for first, last, github in students %}
+                <option value="name" name="{{ github }}"> {{ first }} {{ last }}</option>
+            {% endfor %} 
+        </select> 
+    </div>
+    </br>
+    <div> Project: 
+        <select name="project">
+            {% for (project,) in projects %}
+                <option value="{{ project }}" name="{{ project }}"> {{ project }}</option>
+            {% endfor %} 
+        </select> 
+    </div>
+    </br>
+    Grade: <input type="text" name="grade">
+    </br>
+    <input type='submit' value='Submit Grades'>
+</form>
+</body>
+</html>

@@ -69,7 +69,53 @@ def get_projects(title):
                                                 max_grade=max_grade,
                                                 student_grades=student_grades)
 
-@app.route("/home/")
+
+@app.route("/add_project")
+def make_project():
+    """Add a new project."""
+
+    return render_template("add_project.html")
+
+
+@app.route("/project_added", methods=['POST'])
+def project_added():
+    """Process adding a project."""
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    max_grade = request.form.get('max_grade')
+
+    hackbright.add_project(title, description, max_grade)
+    flash("The project has been successfully added.")
+    return redirect("/home")
+
+
+@app.route("/add_grades")
+def grade_student_project():
+
+    students = hackbright.get_students()
+    print students
+    projects = hackbright.get_projects()
+
+    return render_template("assign_grades.html", 
+                           students=students, 
+                           projects=projects)
+
+
+@app.route("/assign_grades", methods=['POST'])
+def assign_grades_project():
+
+    github = request.form.get('github')
+    project = request.form.get('project')
+    grade = request.form.get('grade')
+
+    hackbright.assign_grade(github, project, grade)
+    flash("The student's grade has been successfully added.")
+    return redirect("/home")
+
+
+
+@app.route("/home")
 def display_all():
 
     students = hackbright.get_students()

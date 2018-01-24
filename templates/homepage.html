@@ -4,6 +4,12 @@
 </head>
 <body>
 
+    {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+          <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
     <ul>
     <b>STUDENTS</b>
     {% for first, last, github in students %}

@@ -59,6 +59,24 @@ def make_new_student(first_name, last_name, github):
         first=first_name, last=last_name)
 
 
+def add_project(title, description, max_grade):
+    """Add a new project to database.
+    """
+
+    QUERY = """
+        INSERT INTO Projects (title, description, max_grade)
+          VALUES (:title, :description, :max_grade)
+        """
+
+    db.session.execute(QUERY, {'title': title,
+                               'description': description,
+                               'max_grade': max_grade})
+    db.session.commit()
+
+    print "Successfully added project: {title}".format(
+        title=title)
+
+
 def get_project_by_title(title):
     """Given a project title, print information about the project."""
 
@@ -232,7 +250,7 @@ def handle_input():
 if __name__ == "__main__":
     connect_to_db(app)
 
-    handle_input()
+    # handle_input()
 
     # To be tidy, we'll close our database connection -- though, since this
     # is where our program ends, we'd quit anyway.
