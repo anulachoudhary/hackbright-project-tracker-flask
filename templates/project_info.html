@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Project Information</title>
+</head>
+<body>
+    <b>Project Info:</b></br>
+    Name: {{ name }}</br>
+    Description: {{ description }}</br>
+    Maximum grade: {{ max_grade }}
+
+</br>
+</br>
+
+    <div>
+    <table>
+        <tr> 
+            <th>Github Id: </th>
+            <th>Grade: </th>
+        </tr>
+            {% for github ,grade in student_grades %}
+        <tr>
+            <td>{{ github }}</td>
+             <td>{{ grade }}</td>
+        </tr>
+        {% endfor %}
+   </table>
+    
+</div>
+
+</html>
